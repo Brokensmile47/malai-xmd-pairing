@@ -1,126 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malai-XMD Premium Pairing</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Add your existing styles here */
-        .pairing-section {
-            margin: 20px 0;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-        }
-        .pairing-section input {
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            width: calc(100% - 22px);
-            margin-bottom: 10px;
-        }
-        .pairing-section button {
-            padding: 10px 20px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .pairing-code {
-            margin-top: 10px;
-            font-size: 1.5em;
-            font-family: 'Courier New', monospace;
-            color: #25D366;
-        }
-        .countdown {
-            margin-top: 5px;
-            font-size: 1em;
-            color: #ff5252;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malai-XMD Pairing</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div class="greeting">🌟 Malai-XMD 🌟</div>
-        <div class="subtitle">Premium WhatsApp Bot Pairing</div>
-        
+        <h1>🌟 Malai-XMD Premium Pairing 🌟</h1>
+        <p>Enter your WhatsApp number to generate a pairing code.</p>
+
+        <div class="pairing-form">
+            <input type="text" id="phoneNumber" placeholder="Enter phone with country code">
+            <button onclick="generateCode()">Generate Code</button>
+        </div>
+
         <div class="session-box">
-            <div class="session-label">Your Session ID</div>
-            <div class="session-id" id="sessionIdValue">Malai-XXXXXXXXX</div>
-            <button class="copy-btn" onclick="copySessionId()">📋 Copy Session ID</button>
+            <p>Session ID: <span id="sessionId">Malai-XXXXXXXX</span></p>
+            <p>Code: <span id="pairingCode">----</span></p>
+            <p id="timer"></p>
         </div>
 
-        <!-- Pairing Section -->
-        <div class="pairing-section">
-            <input type="text" id="whatsappNumber" placeholder="Enter your WhatsApp number (+254...)">
-            <button onclick="generateCode()">Generate Pairing Code</button>
-            <div class="pairing-code" id="pairingCode"></div>
-            <div class="countdown" id="countdown"></div>
-        </div>
-
-        <div class="qr-section">
-            <h3>📱 Scan QR Code</h3>
-            <div id="qr-reader"></div>
-        </div>
-        
         <div class="devices-section">
-            <h3>🔗 Linked Devices</h3>
-            <div id="device-list"></div>
-            <button class="copy-btn" style="width: 100%; margin-top: 10px;" onclick="generateNewSession()">➕ Add New Device</button>
-        </div>
-        
-        <div class="footer">
-            <p>🔒 Your data is encrypted and never stored</p>
-            <p style="margin-top: 10px;">📞 Support: <a href="https://wa.me/254105197055">+254105197055</a></p>
-            <p style="margin-top: 10px;">📚 Repository: <a href="https://github.com/Brokensmile47/Malai-xmd" target="_blank">Brokensmile47/Malai-xmd</a></p>
+            <h2>Paired Devices</h2>
+            <ul id="deviceList"></ul>
         </div>
     </div>
 
-    <script>
-        function copySessionId() {
-            const sessionText = document.getElementById('sessionIdValue').innerText;
-            navigator.clipboard.writeText(sessionText).then(() => {
-                alert('Session ID copied!');
-            });
-        }
-
-        function generateCode() {
-            const whatsappNumber = document.getElementById('whatsappNumber').value.trim();
-            if(!whatsappNumber) {
-                alert('Please enter your WhatsApp number!');
-                return;
-            }
-
-            // Generate random 8-character alphanumeric code
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let code = '';
-            for(let i=0; i<8; i++) {
-                code += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-
-            const codeDisplay = document.getElementById('pairingCode');
-            codeDisplay.innerText = code;
-
-            // Start 1-minute countdown
-            let timeLeft = 60;
-            const countdownEl = document.getElementById('countdown');
-            countdownEl.innerText = `Expires in: ${timeLeft}s`;
-
-            const interval = setInterval(() => {
-                timeLeft--;
-                countdownEl.innerText = `Expires in: ${timeLeft}s`;
-                if(timeLeft <= 0) {
-                    clearInterval(interval);
-                    codeDisplay.innerText = '';
-                    countdownEl.innerText = 'Code expired!';
-                }
-            }, 1000);
-
-            // Here you would send code to backend to detect WhatsApp pairing
-            // For GitHub Pages frontend, backend must be on Replit/Heroku etc.
-        }
-    </script>
+<script src="script.js"></script>
 </body>
 </html>
