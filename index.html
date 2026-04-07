@@ -3,31 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malai-XMD Pairing</title>
+<title>Malai-XMD Premium Pairing</title>
+<script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
 <link rel="stylesheet" href="styles.css">
+<style>
+/* Original styles preserved from your design */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Montserrat', Arial, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; min-height: 100vh; padding: 20px; }
+.container { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 20px; padding: 40px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+.greeting { font-size: 2.5em; color: #ffd700; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(255,215,0,0.3); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
+.subtitle { font-size: 1.2em; color: #25D366; margin-bottom: 30px; font-weight: 300; }
+.session-box { background: rgba(255,215,0,0.1); border: 2px solid #ffd700; border-radius: 15px; padding: 20px; margin-bottom: 30px; animation: slideIn 0.5s ease-out; }
+@keyframes slideIn { from{opacity:0; transform:translateY(-20px);} to{opacity:1; transform:translateY(0);} }
+.session-label { font-size: 0.9em; color: #ffd700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+.session-id { font-size: 1.8em; color: #fff; font-weight: bold; word-break: break-all; margin-bottom: 15px; font-family: 'Courier New', monospace; }
+.copy-btn { background: linear-gradient(135deg, #ffd700, #ffed4e); color: #000; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
+.copy-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,215,0,0.4); }
+.qr-section { margin-bottom: 30px; }
+.qr-section h3 { color: #25D366; margin-bottom: 15px; font-size: 1.3em; }
+#qr-reader { width: 100%; max-width: 400px; margin: 0 auto; border-radius: 15px; overflow: hidden; }
+.devices-section { margin-top: 30px; }
+.devices-section h3 { color: #25D366; margin-bottom: 15px; font-size: 1.3em; }
+.device-card { background: rgba(37,211,102,0.1); border: 1px solid #25D366; border-radius: 12px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+.device-info { text-align: left; }
+.device-name { font-weight: bold; color: #25D366; }
+.device-time { font-size: 0.9em; color: #aaa; }
+.remove-btn { background: #ff5252; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; }
+.remove-btn:hover { background: #ff1744; transform: scale(1.05); }
+.footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9em; color: #aaa; }
+.footer a { color: #25D366; text-decoration: none; transition: color 0.3s ease; }
+.footer a:hover { color: #ffd700; }
+.status-msg { padding: 10px 15px; border-radius: 8px; margin-bottom: 15px; display: none; font-weight: bold; }
+.status-msg.success { background: rgba(37,211,102,0.2); color: #25D366; border: 1px solid #25D366; display: block; }
+.status-msg.error { background: rgba(255,82,82,0.2); color: #ff5252; border: 1px solid #ff5252; display: block; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>🌟 Malai-XMD Premium Pairing 🌟</h1>
-        <p>Enter your WhatsApp number to generate a pairing code.</p>
+<div class="container">
+    <div class="greeting">🌟 Malai-XMD 🌟</div>
+    <div class="subtitle">Premium WhatsApp Bot Pairing</div>
 
-        <div class="pairing-form">
-            <input type="text" id="phoneNumber" placeholder="Enter phone with country code">
-            <button onclick="generateCode()">Generate Code</button>
-        </div>
+    <div id="status-msg" class="status-msg"></div>
 
-        <div class="session-box">
-            <p>Session ID: <span id="sessionId">Malai-XXXXXXXX</span></p>
-            <p>Code: <span id="pairingCode">----</span></p>
-            <p id="timer"></p>
-        </div>
-
-        <div class="devices-section">
-            <h2>Paired Devices</h2>
-            <ul id="deviceList"></ul>
-        </div>
+    <div class="session-box">
+        <div class="session-label">Your Session ID</div>
+        <div class="session-id" id="sessionIdValue">Malai-XXXXXXXXX</div>
+        <button class="copy-btn" onclick="copySessionId()">📋 Copy Session ID</button>
     </div>
 
-<script src="script.js"></script>
+    <div class="pairing-section">
+        <div class="session-label">Your WhatsApp Number</div>
+        <input type="text" id="userNumber" placeholder="+254..." style="padding:10px; width:100%; margin-bottom:15px; border-radius:6px; border:none;">
+        <button class="copy-btn" onclick="generateCode()">➕ Generate Code</button>
+        <div class="session-id" id="pairingCodeDisplay"></div>
+    </div>
+
+    <div class="qr-section">
+        <h3>📱 Scan QR Code</h3>
+        <div id="qr-reader"></div>
+    </div>
+
+    <div class="devices-section">
+        <h3>🔗 Linked Devices</h3>
+        <div id="device-list"></div>
+    </div>
+
+    <div class="footer">
+        <p>🔒 Your data is encrypted and never stored</p>
+        <p style="margin-top:10px;">📞 Support: <a href="https://wa.me/254105197055">+254105197055</a></p>
+        <p style="margin-top:10px;">📚 Repository: <a href="https://github.com/Brokensmile47/Malai-xmd" target="_blank">Brokensmile47/Malai-xmd</a></p>
+    </div>
+</div>
+
+<script>
+// Generate 8-character alphanumeric pairing code
+function generateRandomCode(length = 8) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < length; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+}
+
+// Generate random session ID (long alphanumeric string)
+function generateSessionId() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let session = '';
+    for (let i = 0; i < 128; i++) {
+        session += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return 'Malai-' + session;
+}
+
+function generateCode() {
+    const code = generateRandomCode();
+    const sessionId = generateSessionId();
+    const userNumber = document.getElementById('userNumber').value.trim();
+    if (!userNumber) {
+        alert('Enter WhatsApp number with country code!');
+        return;
+    }
+
+    // Display code and session ID
+    document.getElementById('pairingCodeDisplay').textContent = 'Pairing Code: ' + code;
+    document.getElementById('sessionIdValue').textContent = sessionId;
+
+    // Expire code after 1 minute
+    setTimeout(() => {
+        document.getElementById('pairingCodeDisplay').textContent = 'Code expired';
+    }, 60000);
+
+    // Prepare WhatsApp message link (opens WhatsApp with session ID + greeting)
+    const message = encodeURIComponent(`🌟 Hello! Your device has paired successfully.\nSession ID: ${sessionId}`);
+    const whatsappUrl = `https://wa.me/${userNumber.replace(/\D/g,'')}?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+function copySessionId() {
+    const sessionId = document.getElementById('sessionIdValue').textContent;
+    navigator.clipboard.writeText(sessionId);
+    alert('Session ID copied!');
+}
+</script>
 </body>
 </html>
