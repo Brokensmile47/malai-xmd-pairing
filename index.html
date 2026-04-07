@@ -7,12 +7,7 @@
     <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Montserrat', Arial, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
@@ -20,7 +15,6 @@
             min-height: 100vh;
             padding: 20px;
         }
-        
         .container {
             max-width: 600px;
             margin: 0 auto;
@@ -31,249 +25,137 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
-        
-        .greeting {
-            font-size: 2.5em;
-            color: #ffd700;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        .subtitle {
-            font-size: 1.2em;
-            color: #25D366;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-        
-        .session-box {
-            background: rgba(255, 215, 0, 0.1);
-            border: 2px solid #ffd700;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 30px;
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .session-label {
-            font-size: 0.9em;
-            color: #ffd700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        
-        .session-id {
-            font-size: 1.8em;
-            color: #fff;
-            font-weight: bold;
-            word-break: break-all;
-            margin-bottom: 15px;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .copy-btn {
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .copy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-        }
-        
-        .qr-section {
-            margin-bottom: 30px;
-        }
-        
-        .qr-section h3 {
-            color: #25D366;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        
-        #qr-reader {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .devices-section {
-            margin-top: 30px;
-        }
-        
-        .devices-section h3 {
-            color: #25D366;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        
-        .device-card {
-            background: rgba(37, 211, 102, 0.1);
-            border: 1px solid #25D366;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .device-info {
-            text-align: left;
-        }
-        
-        .device-name {
-            font-weight: bold;
-            color: #25D366;
-        }
-        
-        .device-time {
-            font-size: 0.9em;
-            color: #aaa;
-        }
-        
-        .remove-btn {
-            background: #ff5252;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .remove-btn:hover {
-            background: #ff1744;
-            transform: scale(1.05);
-        }
-        
-        .footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9em;
-            color: #aaa;
-        }
-        
-        .footer a {
-            color: #25D366;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer a:hover {
-            color: #ffd700;
-        }
-        
-        .status-msg {
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: none;
-            font-weight: bold;
-        }
-        
-        .status-msg.success {
-            background: rgba(37, 211, 102, 0.2);
-            color: #25D366;
-            border: 1px solid #25D366;
-            display: block;
-        }
-        
-        .status-msg.error {
-            background: rgba(255, 82, 82, 0.2);
-            color: #ff5252;
-            border: 1px solid #ff5252;
-            display: block;
-        }
+        .greeting { font-size: 2.5em; color: #ffd700; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .subtitle { font-size: 1.2em; color: #25D366; margin-bottom: 30px; font-weight: 300; }
+        .session-box { background: rgba(255, 215, 0, 0.1); border: 2px solid #ffd700; border-radius: 15px; padding: 20px; margin-bottom: 30px; animation: slideIn 0.5s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .session-label { font-size: 0.9em; color: #ffd700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .session-id { font-size: 1.8em; color: #fff; font-weight: bold; word-break: break-all; margin-bottom: 15px; font-family: 'Courier New', monospace; }
+        .copy-btn { background: linear-gradient(135deg, #ffd700, #ffed4e); color: #000; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
+        .copy-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4); }
+        .qr-section { margin-bottom: 30px; }
+        .qr-section h3 { color: #25D366; margin-bottom: 15px; font-size: 1.3em; }
+        #qr-reader { width: 100%; max-width: 400px; margin: 0 auto; border-radius: 15px; overflow: hidden; }
+        .devices-section { margin-top: 30px; }
+        .devices-section h3 { color: #25D366; margin-bottom: 15px; font-size: 1.3em; }
+        .device-card { background: rgba(37, 211, 102, 0.1); border: 1px solid #25D366; border-radius: 12px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .device-info { text-align: left; }
+        .device-name { font-weight: bold; color: #25D366; }
+        .device-time { font-size: 0.9em; color: #aaa; }
+        .remove-btn { background: #ff5252; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; }
+        .remove-btn:hover { background: #ff1744; transform: scale(1.05); }
+        .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.9em; color: #aaa; }
+        .footer a { color: #25D366; text-decoration: none; transition: color 0.3s ease; }
+        .footer a:hover { color: #ffd700; }
+        .status-msg { padding: 10px 15px; border-radius: 8px; margin-bottom: 15px; display: none; font-weight: bold; }
+        .status-msg.success { background: rgba(37, 211, 102, 0.2); color: #25D366; border: 1px solid #25D366; display: block; }
+        .status-msg.error { background: rgba(255, 82, 82, 0.2); color: #ff5252; border: 1px solid #ff5252; display: block; }
+
+        /* WhatsApp pairing section */
+        .pairing-section { margin-bottom: 30px; }
+        .pairing-section input { padding: 10px; width: 80%; border-radius: 8px; margin-bottom: 10px; border: none; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="greeting">🌟 Malai-XMD 🌟</div>
         <div class="subtitle">Premium WhatsApp Bot Pairing</div>
-        
+
         <div id="status-msg" class="status-msg"></div>
-        
+
         <div class="session-box">
             <div class="session-label">Your Session ID</div>
             <div class="session-id" id="sessionIdValue">Malai-XXXXXXXXX</div>
             <button class="copy-btn" onclick="copySessionId()">📋 Copy Session ID</button>
         </div>
-        
+
+        <!-- WhatsApp Pairing Section -->
+        <div class="pairing-section">
+            <h3>📱 Pair Your WhatsApp</h3>
+            <input type="text" id="whatsappNumber" placeholder="Enter WhatsApp number with country code">
+            <br>
+            <button class="copy-btn" onclick="generatePairingCode()">Generate Code</button>
+            <div id="pairingCodeDisplay" style="margin-top:15px; font-size:1.5em; color:#ffd700; font-family:'Courier New', monospace;"></div>
+            <div id="pairingStatus" style="margin-top:10px; color:#25D366; font-weight:bold;"></div>
+            <button class="copy-btn" style="margin-top:10px;" onclick="simulatePairing()">Simulate WhatsApp Pairing</button>
+        </div>
+
         <div class="qr-section">
             <h3>📱 Scan QR Code</h3>
             <div id="qr-reader"></div>
         </div>
-        
+
         <div class="devices-section">
             <h3>🔗 Linked Devices</h3>
             <div id="device-list"></div>
             <button class="copy-btn" style="width: 100%; margin-top: 10px;" onclick="generateNewSession()">➕ Add New Device</button>
         </div>
-        
+
         <div class="footer">
             <p>🔒 Your data is encrypted and never stored</p>
             <p style="margin-top: 10px;">📞 Support: <a href="https://wa.me/254105197055">+254105197055</a></p>
             <p style="margin-top: 10px;">📚 Repository: <a href="https://github.com/Brokensmile47/Malai-xmd" target="_blank">Brokensmile47/Malai-xmd</a></p>
         </div>
     </div>
-    
+
     <script>
-        // Generate a random session ID
-        function generateSessionID() {
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            let id = "Malai-";
-            for (let i = 0; i < 9; i++) { // 9 characters like your placeholder
-                id += chars[Math.floor(Math.random() * chars.length)];
+        // Random 8-character alphanumeric code
+        function generateRandomCode(length = 8) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let code = '';
+            for (let i = 0; i < length; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
             }
-            return id;
+            return code;
         }
 
-        // Set the session ID when the page loads
-        document.addEventListener("DOMContentLoaded", () => {
-            const sessionEl = document.getElementById("sessionIdValue");
-            sessionEl.innerText = generateSessionID();
-        });
+        let currentCode = '';
+        let codeTimer;
+
+        function generatePairingCode() {
+            const number = document.getElementById('whatsappNumber').value.trim();
+            if (!number.match(/^\+?\d+$/)) {
+                alert('Please enter a valid WhatsApp number with country code, e.g., +254712345678');
+                return;
+            }
+
+            currentCode = generateRandomCode();
+            document.getElementById('pairingCodeDisplay').innerText = currentCode;
+            document.getElementById('pairingStatus').innerText = `Code valid for 1 minute`;
+
+            if (codeTimer) clearTimeout(codeTimer);
+
+            codeTimer = setTimeout(() => {
+                currentCode = '';
+                document.getElementById('pairingCodeDisplay').innerText = '';
+                document.getElementById('pairingStatus').innerText = `Code expired`;
+            }, 60000);
+        }
+
+        function simulatePairing() {
+            if (currentCode === '') {
+                alert('No valid code available. Generate a new one.');
+                return;
+            }
+
+            document.getElementById('pairingStatus').innerText = `Paired successfully from Ubuntu! ✅`;
+            currentCode = '';
+            document.getElementById('pairingCodeDisplay').innerText = '';
+            clearTimeout(codeTimer);
+        }
 
         // Copy session ID function
         function copySessionId() {
-            const sessionEl = document.getElementById("sessionIdValue");
-            navigator.clipboard.writeText(sessionEl.innerText)
-                .then(() => alert("Session ID copied to clipboard!"))
-                .catch(() => alert("Failed to copy!"));
+            const sessionId = document.getElementById('sessionIdValue').innerText;
+            navigator.clipboard.writeText(sessionId);
+            alert('Session ID copied!');
         }
 
-        // Placeholder for generating a new session
+        // Generate new random session ID
         function generateNewSession() {
-            const sessionEl = document.getElementById("sessionIdValue");
-            sessionEl.innerText = generateSessionID();
+            const newId = 'Malai-' + generateRandomCode();
+            document.getElementById('sessionIdValue').innerText = newId;
         }
     </script>
 </body>
