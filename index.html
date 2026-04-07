@@ -4,94 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malai-XMD Premium Pairing</title>
-    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #fff;
-            min-height: 100vh;
+        /* Add your existing styles here */
+        .pairing-section {
+            margin: 20px 0;
             padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
         }
-        .greeting { font-size: 2.5em; color: #ffd700; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3); animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        .subtitle { font-size: 1.2em; color: #25D366; margin-bottom: 30px; font-weight: 300; }
-        .session-box { background: rgba(255, 215, 0, 0.1); border: 2px solid #ffd700; border-radius: 15px; padding: 20px; margin-bottom: 30px; animation: slideIn 0.5s ease-out; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        .session-label { font-size: 0.9em; color: #ffd700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
-        .session-id { font-size: 1.8em; color: #fff; font-weight: bold; word-break: break-all; margin-bottom: 15px; font-family: 'Courier New', monospace; }
-        .copy-btn { background: linear-gradient(135deg, #ffd700, #ffed4e); color: #000; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
-        .copy-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4); }
-        .qr-section { margin-bottom: 30px; }
-        .qr-section h3 { color: #25D366; margin-bottom: 15px; font-size: 1.3em; }
-        #qr-reader { width: 100%; max-width: 400px; margin: 0 auto; border-radius: 15px; overflow: hidden; }
-        .devices-section { margin-top: 30px; }
-        .devices-section h3 { color: #25D366; margin-bottom: 15px; font-size: 1.3em; }
-        .device-card { background: rgba(37, 211, 102, 0.1); border: 1px solid #25D366; border-radius: 12px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .device-info { text-align: left; }
-        .device-name { font-weight: bold; color: #25D366; }
-        .device-time { font-size: 0.9em; color: #aaa; }
-        .remove-btn { background: #ff5252; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; }
-        .remove-btn:hover { background: #ff1744; transform: scale(1.05); }
-        .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.9em; color: #aaa; }
-        .footer a { color: #25D366; text-decoration: none; transition: color 0.3s ease; }
-        .footer a:hover { color: #ffd700; }
-        .status-msg { padding: 10px 15px; border-radius: 8px; margin-bottom: 15px; display: none; font-weight: bold; }
-        .status-msg.success { background: rgba(37, 211, 102, 0.2); color: #25D366; border: 1px solid #25D366; display: block; }
-        .status-msg.error { background: rgba(255, 82, 82, 0.2); color: #ff5252; border: 1px solid #ff5252; display: block; }
-
-        /* WhatsApp pairing section */
-        .pairing-section { margin-bottom: 30px; }
-        .pairing-section input { padding: 10px; width: 80%; border-radius: 8px; margin-bottom: 10px; border: none; }
+        .pairing-section input {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: calc(100% - 22px);
+            margin-bottom: 10px;
+        }
+        .pairing-section button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .pairing-code {
+            margin-top: 10px;
+            font-size: 1.5em;
+            font-family: 'Courier New', monospace;
+            color: #25D366;
+        }
+        .countdown {
+            margin-top: 5px;
+            font-size: 1em;
+            color: #ff5252;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="greeting">🌟 Malai-XMD 🌟</div>
         <div class="subtitle">Premium WhatsApp Bot Pairing</div>
-
-        <div id="status-msg" class="status-msg"></div>
-
+        
         <div class="session-box">
             <div class="session-label">Your Session ID</div>
             <div class="session-id" id="sessionIdValue">Malai-XXXXXXXXX</div>
             <button class="copy-btn" onclick="copySessionId()">📋 Copy Session ID</button>
         </div>
 
-        <!-- WhatsApp Pairing Section -->
+        <!-- Pairing Section -->
         <div class="pairing-section">
-            <h3>📱 Pair Your WhatsApp</h3>
-            <input type="text" id="whatsappNumber" placeholder="Enter WhatsApp number with country code">
-            <br>
-            <button class="copy-btn" onclick="generatePairingCode()">Generate Code</button>
-            <div id="pairingCodeDisplay" style="margin-top:15px; font-size:1.5em; color:#ffd700; font-family:'Courier New', monospace;"></div>
-            <div id="pairingStatus" style="margin-top:10px; color:#25D366; font-weight:bold;"></div>
-            <button class="copy-btn" style="margin-top:10px;" onclick="simulatePairing()">Simulate WhatsApp Pairing</button>
+            <input type="text" id="whatsappNumber" placeholder="Enter your WhatsApp number (+254...)">
+            <button onclick="generateCode()">Generate Pairing Code</button>
+            <div class="pairing-code" id="pairingCode"></div>
+            <div class="countdown" id="countdown"></div>
         </div>
 
         <div class="qr-section">
             <h3>📱 Scan QR Code</h3>
             <div id="qr-reader"></div>
         </div>
-
+        
         <div class="devices-section">
             <h3>🔗 Linked Devices</h3>
             <div id="device-list"></div>
             <button class="copy-btn" style="width: 100%; margin-top: 10px;" onclick="generateNewSession()">➕ Add New Device</button>
         </div>
-
+        
         <div class="footer">
             <p>🔒 Your data is encrypted and never stored</p>
             <p style="margin-top: 10px;">📞 Support: <a href="https://wa.me/254105197055">+254105197055</a></p>
@@ -100,62 +79,47 @@
     </div>
 
     <script>
-        // Random 8-character alphanumeric code
-        function generateRandomCode(length = 8) {
+        function copySessionId() {
+            const sessionText = document.getElementById('sessionIdValue').innerText;
+            navigator.clipboard.writeText(sessionText).then(() => {
+                alert('Session ID copied!');
+            });
+        }
+
+        function generateCode() {
+            const whatsappNumber = document.getElementById('whatsappNumber').value.trim();
+            if(!whatsappNumber) {
+                alert('Please enter your WhatsApp number!');
+                return;
+            }
+
+            // Generate random 8-character alphanumeric code
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             let code = '';
-            for (let i = 0; i < length; i++) {
+            for(let i=0; i<8; i++) {
                 code += chars.charAt(Math.floor(Math.random() * chars.length));
             }
-            return code;
-        }
 
-        let currentCode = '';
-        let codeTimer;
+            const codeDisplay = document.getElementById('pairingCode');
+            codeDisplay.innerText = code;
 
-        function generatePairingCode() {
-            const number = document.getElementById('whatsappNumber').value.trim();
-            if (!number.match(/^\+?\d+$/)) {
-                alert('Please enter a valid WhatsApp number with country code, e.g., +254712345678');
-                return;
-            }
+            // Start 1-minute countdown
+            let timeLeft = 60;
+            const countdownEl = document.getElementById('countdown');
+            countdownEl.innerText = `Expires in: ${timeLeft}s`;
 
-            currentCode = generateRandomCode();
-            document.getElementById('pairingCodeDisplay').innerText = currentCode;
-            document.getElementById('pairingStatus').innerText = `Code valid for 1 minute`;
+            const interval = setInterval(() => {
+                timeLeft--;
+                countdownEl.innerText = `Expires in: ${timeLeft}s`;
+                if(timeLeft <= 0) {
+                    clearInterval(interval);
+                    codeDisplay.innerText = '';
+                    countdownEl.innerText = 'Code expired!';
+                }
+            }, 1000);
 
-            if (codeTimer) clearTimeout(codeTimer);
-
-            codeTimer = setTimeout(() => {
-                currentCode = '';
-                document.getElementById('pairingCodeDisplay').innerText = '';
-                document.getElementById('pairingStatus').innerText = `Code expired`;
-            }, 60000);
-        }
-
-        function simulatePairing() {
-            if (currentCode === '') {
-                alert('No valid code available. Generate a new one.');
-                return;
-            }
-
-            document.getElementById('pairingStatus').innerText = `Paired successfully from Ubuntu! ✅`;
-            currentCode = '';
-            document.getElementById('pairingCodeDisplay').innerText = '';
-            clearTimeout(codeTimer);
-        }
-
-        // Copy session ID function
-        function copySessionId() {
-            const sessionId = document.getElementById('sessionIdValue').innerText;
-            navigator.clipboard.writeText(sessionId);
-            alert('Session ID copied!');
-        }
-
-        // Generate new random session ID
-        function generateNewSession() {
-            const newId = 'Malai-' + generateRandomCode();
-            document.getElementById('sessionIdValue').innerText = newId;
+            // Here you would send code to backend to detect WhatsApp pairing
+            // For GitHub Pages frontend, backend must be on Replit/Heroku etc.
         }
     </script>
 </body>
