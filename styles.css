@@ -1,62 +1,48 @@
-.pairing {
-    background-color: rgba(30, 30, 30, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
-}
-
-h1 {
-    color: gold;
-    text-align: center;
-    animation: fadeIn 1s ease-in;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.button {
-    background-color: rgba(255, 215, 0, 0.9);
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
     color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+input {
+    padding: 10px;
+    width: 70%;
+    border-radius: 5px;
     border: none;
-    padding: 10px 20px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    background: #25D366;
+    color: white;
     border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.3s;
 }
 
-.button:hover {
-    transform: scale(1.05);
+button:hover {
+    background: #128C7E;
 }
 
-.input {
+.session-box {
+    margin: 20px 0;
+    padding: 15px;
     background: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    color: #fff;
-    animation: inputFocus 0.5s ease-in-out;
+    border-radius: 10px;
 }
 
-.input:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
-}
-
-@keyframes inputFocus {
-    from { background: rgba(255, 255, 255, 0.1); }
-    to { background: rgba(255, 215, 0, 0.2); }
-}
-
-@media (max-width: 768px) {
-    .pairing {
-        padding: 10px;
-        margin: 10px;
-    }
-    .button {
-        width: 100%;
-    }
+.devices-section ul {
+    list-style: none;
+    padding: 0;
 }
